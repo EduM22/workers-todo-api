@@ -28,6 +28,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "faunadb": "^3.0.0",
     "itty-router": "^1.4.3"
   }
 }
