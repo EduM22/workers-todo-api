@@ -20,6 +20,15 @@ class Todo {
             q.Get(q.Ref(q.Collection(this.collection), id))
         )
     }
+
+    getAll() : Promise<any> {
+        return client.query(
+            q.Map(
+                q.Paginate(q.Documents(q.Collection(this.collection))),
+                q.Lambda(x => q.Get(x))
+            )
+        )
+    }
     
     update(data: any, id: string) : Promise<any> {
         return client.query(

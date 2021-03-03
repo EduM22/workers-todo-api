@@ -3,12 +3,13 @@ import { todo as Todo } from './db'
 
 const router = Router()
 
-router.get('/todo/:id', async request => {
-  // testID => 288908599761043969
-  const { id } = request.params
+router.get('/todo', async (request) => {
   try {
-    const todo = await Todo.read(id)
-    return new Response(JSON.stringify(todo.data), {
+    const { data } = await Todo.getAll()
+    const todos = data.map((todo) => {
+      return todo.data
+    })
+    return new Response(JSON.stringify(todos), {
       headers: {
         'content-type': 'application/json'
       }
@@ -22,7 +23,7 @@ router.get('/todo/:id', async request => {
   }
 })
 
-router.post('/todo', async request => {
+router.post('/todo', async (request) => {
   try {
     const { name } = await request.json()
     if (name == undefined || name == '') {
@@ -43,7 +44,26 @@ router.post('/todo', async request => {
   }
 })
 
-router.put('/todo/:id', async request => {
+router.get('/todo/:id', async (request) => {
+  // testID => 288908599761043969
+  try {
+    const { id } = request.params
+    const todo = await Todo.read(id)
+    return new Response(JSON.stringify(todo), {
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+  } catch (error) {
+    return new Response(error, {
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+  }
+})
+
+router.put('/todo/:id', async (request) => {
   try {
     const { id } = request.params
     const { name } = await request.json()
