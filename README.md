@@ -1,11 +1,11 @@
-# `workers-simple-api`
+# `workers-todo-api`
 
 A simple TypeScript Cloudflare worker project.
 ### 👩 💻 Developing
 
 [`src/index.js`](./src/index.ts) calls the request handler in [`src/handler.ts`](./src/handler.ts), and will return the [request method](https://developer.mozilla.org/en-US/docs/Web/API/Request/method) for the given request.
 
-### 🧪 Testing
+### 🧪 Testing (not implemented)
 
 This template comes with mocha tests which simply test that the request handler can handle each request method. `npm test` will run your tests.
 
